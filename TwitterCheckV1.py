@@ -39,13 +39,12 @@ By Xcode @Xcodeone1
       /_:-`    
       
         **************************************
-        * -> Development: Xcode          *
-        * -> Telegram: https://t.me/x0Saudi *
-        * -> Twitter @XcodeOn1              *      
+        * -> Development: Xcode0x          *
+        * -> Twitter @Xcode0x             *      
         **************************************                                                 
 ''')
 url = "https://api.twitter.com:443/i/users/email_available.json?email="+ options.email +"&send_error_codes=1"
-headers = {"Accept": "application/json", "X-Twitter-Client-Version": "8.41.1",  "Accept-Language": "en", "Accept-Encoding": "gzip, deflate",  "User-Agent": "Twitter-iPhone/8.41.1 iOS/Enjoy (ByXcode;@Xcodeone1,4;;;;;1;https://t.me/x0Saudi)", "Connection": "close", "X-Twitter-Client-Limit-Ad-Tracking": "0", "X-Twitter-API-Version": "5", "X-Twitter-Client": "Twitter-Xcode"}
+headers = {"Accept": "application/json", "X-Twitter-Client-Version": "8.41.1",  "Accept-Language": "en", "Accept-Encoding": "gzip, deflate",  "User-Agent": "Twitter-iPhone/8.41.1 iOS/Enjoy (ByXcode;@Xcode0x,4;;;;;1;https://twitter.com/xcode0x)", "Connection": "close", "X-Twitter-Client-Limit-Ad-Tracking": "0", "X-Twitter-API-Version": "5", "X-Twitter-Client": "Twitter-Xcode0x"}
 email = requests.get(url, headers=headers)
 Emaildata = email.json()
 
