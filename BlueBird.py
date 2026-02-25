@@ -1,29 +1,38 @@
-# !/usr/bin/env python
-import time
+#!/usr/bin/env python3
+import os
 import requests
 import optparse
 import time as mm
 import sys as n
-W = '\033[0m'  # white (normal)
-R = '\033[31m'  # red
-G = '\033[32m'  # green
-O = '\033[33m'  # orange
-B = '\033[34m'  # blue
-P = '\033[35m'  # purple
-C = '\033[36m'  # cyan
-GR = '\033[37m' # gray
-def slow(M): 
-    for c in M + '\n':
+
+# Enable ANSI colors on some Windows terminals
+os.system("")
+
+W  = '\033[0m'   # white (normal)
+R  = '\033[31m'  # red
+G  = '\033[32m'  # green
+O  = '\033[33m'  # orange
+B  = '\033[34m'  # blue
+P  = '\033[35m'  # purple
+C  = '\033[36m'  # cyan
+GR = '\033[37m'  # gray
+
+def slow(msg: str):
+    for c in msg + '\n':
         n.stdout.write(c)
         n.stdout.flush()
-        mm.sleep(1. / 200)
+        mm.sleep(1.0 / 200)
+
 parser = optparse.OptionParser()
-parser.add_option("-e", "--email",dest="email", help="Email You want check in Twitter")
+parser.add_option("-e", "--email", dest="email", help="Email you want to check in Twitter/X")
 (options, arguments) = parser.parse_args()
-slow( B +
 
-'''
+if not options.email:
+    print(R + "[!] Missing email. Use: -e target@email.com" + W)
+    n.exit(1)
 
+
+slow(B + r'''
 
 By Xcode @Xcodeone1
 
@@ -37,19 +46,46 @@ By Xcode @Xcodeone1
      || : |;    `Y-Y`    ;| : ||
      \:| :/======"="======\| |:/
       /_:-`    
-      
-        **************************************
-        * -> Development: Mohamed Almarri | Xcode0x          *
-        * -> Twitter @xcodex0             *      
-        **************************************                                                 
-''')
-url = "https://api.twitter.com:443/i/users/email_available.json?email="+ options.email +"&send_error_codes=1"
-headers = {"Accept": "application/json", "X-Twitter-Client-Version": "8.41.1",  "Accept-Language": "en", "Accept-Encoding": "gzip, deflate",  "User-Agent": "Twitter-iPhone/8.41.1 iOS/Enjoy (ByXcode;@Xcode0x,4;;;;;1;https://twitter.com/xcode0x)", "Connection": "close", "X-Twitter-Client-Limit-Ad-Tracking": "0", "X-Twitter-API-Version": "5", "X-Twitter-Client": "Twitter-Xcode0x"}
-email = requests.get(url, headers=headers)
-Emaildata = email.json()
 
-if Emaildata["msg"] == 'Available!' :
-	print(R+ " [ Twitter - Dont' Have account ]")
-else:
-	print(G + " [Twitter - Have account ] ")
-print("\n")
+        **************************************
+        * -> Development: Mohamed Almarri | Xcode0x *
+        * -> Twitter: @xcode0x                     *
+        **************************************
+'''+W)
+
+url = f"https://api.twitter.com/i/users/email_available.json?email={options.email}&send_error_codes=1"
+
+headers = {
+    "Accept": "application/json",
+    "X-Twitter-Client-Version": "8.41.1",
+    "Accept-Language": "en",
+    "Accept-Encoding": "gzip, deflate",
+    "User-Agent": "Twitter-iPhone/8.41.1 iOS/Enjoy (By :xcodex0;@xcodex0,4;;;;;1;https://twitter.com/xcodex0)",
+    "Connection": "close",
+    "X-Twitter-Client-Limit-Ad-Tracking": "0",
+    "X-Twitter-API-Version": "5",
+    "X-Twitter-Client": "Twitter-xcodex0"
+}
+
+try:
+    resp = requests.get(url, headers=headers, timeout=15)
+    resp.raise_for_status()
+
+    data = resp.json()
+
+
+    msg = data.get("msg", "")
+
+    if msg == "Available!":
+        print(R + " [Twitter - Don't have account]" + W)
+    else:
+        print(G + " [Twitter - Have account]" + W)
+
+except requests.exceptions.Timeout:
+    print(R + " [!] Request timed out" + W)
+except requests.exceptions.RequestException as e:
+    print(R + f" [!] Request error: {e}" + W)
+except ValueError:
+    print(R + " [!] Failed to parse JSON response" + W)
+
+print()
