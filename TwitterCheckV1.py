@@ -12,7 +12,7 @@ B = '\033[34m'  # blue
 P = '\033[35m'  # purple
 C = '\033[36m'  # cyan
 GR = '\033[37m' # gray
-def slow(M): ## By Twitter : @Matrix0700
+def slow(M): 
     for c in M + '\n':
         n.stdout.write(c)
         n.stdout.flush()
