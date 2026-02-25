@@ -14,3 +14,7 @@ This script leverages an internal Twitter endpoint used during account registrat
 - 🎯 Target Profiling
 - 🔴 Red Team Reconnaissance
 - 🕵️‍♂️ Threat Actor Infrastructure Mapping
+
+## 📸 Tool Preview
+
+![BlueBird Screenshot](screenshot.png)
