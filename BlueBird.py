@@ -34,7 +34,7 @@ if not options.email:
 
 slow(B + r'''
 
-By Xcode @Xcodeone1
+By Mohamed Almarri | xcode0x 
 
           _.-'`)     (`'-._
         .' -' / __    \ '- '.
