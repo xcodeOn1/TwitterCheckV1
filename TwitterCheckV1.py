@@ -39,8 +39,8 @@ By Xcode @Xcodeone1
       /_:-`    
       
         **************************************
-        * -> Development: Xcode0x          *
-        * -> Twitter @Xcode0x             *      
+        * -> Development: Mohamed Almarri | Xcode0x          *
+        * -> Twitter @xcodex0             *      
         **************************************                                                 
 ''')
 url = "https://api.twitter.com:443/i/users/email_available.json?email="+ options.email +"&send_error_codes=1"
